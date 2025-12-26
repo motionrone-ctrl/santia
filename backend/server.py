@@ -124,7 +124,8 @@ async def create_intake(input: IntakeCreate):
     await db.intakes.insert_one(doc)
     
     # Return without _id
-    del doc["_id"] if "_id" in doc else None
+    if "_id" in doc:
+        del doc["_id"]
     
     return IntakeResponse(**doc)
 
